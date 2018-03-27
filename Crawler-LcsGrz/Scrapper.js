@@ -5,12 +5,9 @@ const cheerio = require('cheerio')
 let c = 0
 let arr = ""
 const crawlerRecursivo = (callback) => {
-  request.post({
-    url: 'http://noticias.ulp.edu.ar/php/includes/autoload_process.php',
-    form: { 'group_no': c }
-  }, (err, res, body) => {
-    if (err) { return console.log(err); }
-
+  request.post({ url: 'http://noticias.ulp.edu.ar/php/includes/autoload_process.php',form: { 'group_no': c } }, (err, res, body) => {
+    if (err) callback(err);
+    
     const $ = cheerio.load(body)
 
     if (body !== "") {
