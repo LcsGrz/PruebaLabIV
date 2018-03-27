@@ -27,7 +27,7 @@ const crawlerRecursivo = (callback) => {
 
 const crawler = (callback) => {
   request.post("http://noticias.ulp.edu.ar/php/functions/functions.php?operacion=7", (err, res, body) => {
-    if (err) { return console.log(err); }
+    if (err) { callback(err); }
     const $ = cheerio.load(body)
     callback($('div#titulo-portada').text())
   })
