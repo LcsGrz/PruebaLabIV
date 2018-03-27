@@ -1,10 +1,11 @@
 const request = require('request');
 const cheerio = require('cheerio')
+
+/*
 //Callbacks
 let c = 0
 let arr = ""
 const crawler = (callback) => {
-
   request.post({
     url: 'http://noticias.ulp.edu.ar/php/includes/autoload_process.php',
     form: { 'group_no': c }
@@ -27,8 +28,27 @@ crawler((datos) => {
   console.log(datos)
 })
 
-//Promesas - VERIFICAR SI FUNCIONA
+*/
 
+
+//Callbacks
+const crawler = (callback) => {
+  request.post("http://noticias.ulp.edu.ar/php/functions/functions.php?operacion=7", (err, res, body) => {
+    if (err) { return console.log(err); }
+    const $ = cheerio.load(body)
+    callback($('div#titulo-portada').text())
+  })
+}
+
+crawler((datos) => {
+  console.log(datos)
+})
+
+
+
+
+//Promesas - VERIFICAR SI FUNCIONA
+/*
 const CrawlerPromesa = () =>{
     return new Promise((resolve, reject) => {
         let flag = true
@@ -50,4 +70,4 @@ const CrawlerPromesa = () =>{
     })
 })}
 
-CrawlerPromesa().then(datos => console.log(datos)).catch(error => console.error(error))
+CrawlerPromesa().then(datos => console.log(datos)).catch(error => console.error(error))*/

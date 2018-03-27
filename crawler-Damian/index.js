@@ -15,7 +15,7 @@ const i=0;
 
 const crawler = (callback) =>{
 	const arre= new Array();
-	request.post({url: 'http://noticias.ulp.edu.ar/php/includes/autoload_process.php', form: { 'group_no': 0 }}, (err, response, html) => {
+	request.post('http://noticias.ulp.edu.ar/php/functions/functions.php?operacion=7', (err, response, html) => {
 		if (err) { return console.log(err); }
 		const $ = cheerio.load(html);
 		$('div.titulo-portada a').each (function (i, elemento) {
