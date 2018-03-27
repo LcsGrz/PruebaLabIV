@@ -1,11 +1,10 @@
 const request = require('request');
 const cheerio = require('cheerio')
 
-/*
 //Callbacks
 let c = 0
 let arr = ""
-const crawler = (callback) => {
+const crawlerRecursivo = (callback) => {
   request.post({
     url: 'http://noticias.ulp.edu.ar/php/includes/autoload_process.php',
     form: { 'group_no': c }
@@ -24,14 +23,8 @@ const crawler = (callback) => {
   })
 }
 
-crawler((datos) => {
-  console.log(datos)
-})
+//crawlerRecursivo((datos) => {console.log(datos)})
 
-*/
-
-
-//Callbacks
 const crawler = (callback) => {
   request.post("http://noticias.ulp.edu.ar/php/functions/functions.php?operacion=7", (err, res, body) => {
     if (err) { return console.log(err); }
