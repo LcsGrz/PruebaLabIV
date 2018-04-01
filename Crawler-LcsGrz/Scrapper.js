@@ -13,7 +13,7 @@ const crawlerRecursivo = (callback) => {
     if (body !== "") {
       c++
       arr += $('div.titulo-portada').text();
-      crawler(callback)
+      crawlerRecursivo(callback)
     }
     else
       callback(arr)
@@ -30,34 +30,18 @@ const crawler = (callback) => {
   })
 }
 
-crawler((datos) => {
-  console.log(datos)
-})
+//crawler((datos) => {console.log(datos)})
 
+//Promesas
 
-
-
-//Promesas - VERIFICAR SI FUNCIONA
-/*
-const CrawlerPromesa = () =>{
+const CrawlerPromesa = (pagina) =>{
     return new Promise((resolve, reject) => {
-        let flag = true
-        let x = 0
-        let datos = ""
-
-        while(flag){}
-    request.post({url: 'http://noticias.ulp.edu.ar/php/includes/autoload_process.php', form: { 'group_no': x }}, (err, res, body) => {
-        if (err) { return console.log(err); }
-
+      request.post(pagina, (err, res, body) => {
+        if (err) { reject(error); }
         const $ = cheerio.load(body)
-
-        if (body !== "") {
-            x++
-            datos += $('div.titulo-portada').text();
-        }
-        else
-            flag = false
-    })
+        const data = $('div#titulo-portada').text()
+        resolve(data)
+      })
 })}
 
-CrawlerPromesa().then(datos => console.log(datos)).catch(error => console.error(error))*/
+CrawlerPromesa("http://noticias.ulp.edu.ar/php/functions/functions.php?operacion=7").then(data => console.log(data)).catch(error => console.error(error))
