@@ -1,6 +1,6 @@
 const request = require('request');
 const cheerio = require('cheerio');
-const i = 0;
+/*const i = 0;
 
 request.post({url: 'http://noticias.ulp.edu.ar/php/includes/autoload_process.php', form: { 'group_no': 0 }}, (err, response, html) => {
 	if (err) { return console.log(err); }
@@ -32,8 +32,21 @@ const crawler = (callback) => {
 }
 
 crawler((arre) => console.log(arre))
+*/
+const CrawlerPromesa = (pagina, seccion) => {
+    return new Promise((resolve, reject) => {
+        request.post(pagina, (err, res, body) => {
+            if (err) { reject(error); }
+            const $ = cheerio.load(body)
+            const data = $(seccion).text()
+            resolve(data)
+        })
+    })
+}
 
-
+CrawlerPromesa("http://www.lapuntasanluis.com/", 'h2.article-title')
+.then(data => console.log(data))
+.catch(error => console.error(error))
 
 
 
