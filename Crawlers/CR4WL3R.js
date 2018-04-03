@@ -2,21 +2,21 @@ const request = require('request')
 const cheerio = require('cheerio')
 
 const paginas = {
-	'noticiasulp': {
-		'http://noticias.ulp.edu.ar/php/functions/functions.php?operacion=7',
-		'div#titulo-portada'
+	noticiasulp: {
+		url: 'http://noticias.ulp.edu.ar/php/functions/functions.php?operacion=7',
+		patron: 'div#titulo-portada'
 	},
-	'diariosl':{
-		"http://eldiariodesanluis.com/",
-		'h3 a.title'
+	diariosl:{
+		url: "http://eldiariodesanluis.com/",
+		patron: 'h3 a.title'
 	},
-	'slinforma':{
-		"http://www.sanluisinforma.com.ar/",
-		'h2.article-title'
+	slinforma:{
+		url: "http://www.sanluisinforma.com.ar/",
+		patron:'h2.article-title'
 	},
-	'lpsl':{
-		"http://www.lapuntasanluis.com/",
-		'h2.article-title'
+	lpsl:{
+		url:"http://www.lapuntasanluis.com/",
+		patron:'h2.article-title'
 	}
 }
 
