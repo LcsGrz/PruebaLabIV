@@ -1,7 +1,7 @@
 const request = require('request')
 const cheerio = require('cheerio')
 
-const paginas = {
+const diarios = {
 	noticiasulp: {
 		url: 'http://noticias.ulp.edu.ar/php/functions/functions.php?operacion=7',
 		patron: 'div#titulo-portada'
@@ -20,15 +20,15 @@ const paginas = {
 	}
 }
 
-const CrawlerPromesa = (pagina, seccion) => {
+const CrawlerPromesa = (pagina) => {
     return new Promise((resolve, reject) => {
-        request.post(pagina, (err, res, body) => {
+        request.post(diarios[pagina].url, (err, res, body) => {
             if (err) { reject(error); }
             const $ = cheerio.load(body)
-            const data = $(seccion).text()
+            const data = $(diarios[pagina].patron).text()
             resolve(data)
         })
     })
 }
 
-CrawlerPromesa("http://noticias.ulp.edu.ar/php/functions/functions.php?operacion=7", 'div#titulo-portada').then(data => console.log(data)).catch(error => console.error(error))
+CrawlerPromesa('slinforma').then(data => console.log(data)).catch(error => console.error(error))
