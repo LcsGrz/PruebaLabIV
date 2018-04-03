@@ -32,19 +32,17 @@ const i= 0;
 }
 crawler((arr) => console.log(arr))*/
 
-const crawler = new Promise(e,f) => {
-	const arr = new Array();
-	request.post({ url: 'http://noticias.ulp.edu.ar/php/includes/autoload_process.php', form: { 'group_no':0 } }, (err, response, body) => {
-		if(err) { return f; }
-		const $ = cheerio.load(body);
-		$('div.titulo-portada a').each (function (i, elemento) {
-			const a = $(this);
-			const links = a.attr('href');
-			arr[i] = titulo: a.text().trim()
-			arr.map = links
-			i++;
-		})
-		return e;
-	});     
+const CrawlerPromesa = (pagina, seccion) => {
+    return new Promise((resolve, reject) => {
+        request.post(pagina, (err, res, body) => {
+            if (err) { reject(error); }
+            const $ = cheerio.load(body)
+            const data = $(seccion).text()
+            resolve(data)
+        })
+    })
 }
-crawler((arr) => console.log(arr))
+
+CrawlerPromesa("http://www.sanluisinforma.com.ar/", 'h2.article-title')
+.then(data => console.log(data))
+.catch(error => console.error(error))
