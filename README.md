@@ -1,5 +1,2 @@
-Repo inicial
-
-este es un cambio que hizo maraaacelo
-
-puto el que lee
+Nueva rama.
+Se creo una sola funcion de crawler para el uso cotidiano. arrehhhh
