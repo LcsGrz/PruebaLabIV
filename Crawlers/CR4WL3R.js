@@ -14,15 +14,15 @@ const diarios = {
 		url: "http://www.sanluisinforma.com.ar/",
 		patron: 'article',
 		patronTitulo:'h2.article-title',
-		patronImg:'article .item-image img',
-		patronUrl:'a href'
+		patronImg:'.item-image img',
+		patronUrl:'a'
 	},
 	lpsl:{
 		url:"http://www.lapuntasanluis.com/",
 		patron: 'article',
 		patronTitulo:'h2.article-title',
-		patronImg:'img src',
-		patronUrl:'a href'
+		patronImg:'img',
+		patronUrl:'a'
 	}
 }
 
@@ -31,16 +31,16 @@ const CrawlerPromesa = (pagina) => {
     return new Promise((resolve, reject) => {
         request.post(url, (err, res, body) => {
             if (err) { reject(error); }
-            //const noticias = []
             const $ = cheerio.load(body)
-            $(patronImg).each(function(index, el) {
-
-            	//console.log(index)
-            	//console.log(el[])
-            	//console.log(el)
-            	console.log(el.attribs.src)
-			});
             
+            const articulos = $(patron)
+        	articulos.each(function(index, el) {
+        		console.log($(el).find(patronTitulo).text().trim())
+        		console.log($(el).find(patronImg).attr('src'))
+        		console.log($(el).find(patronUrl).attr('href'))
+        		console.log('====================')
+        	});
+
             const data = "asd"//$(patron).text().trim()
             resolve(data)
         })
