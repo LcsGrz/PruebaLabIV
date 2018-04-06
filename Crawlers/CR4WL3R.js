@@ -1,5 +1,13 @@
+const fs = require('fs');
 const request = require('request')
 const cheerio = require('cheerio')
+
+const guardar = (dato) => {
+  fs.writeFile("noticias.json", dato, err => {
+    if (err) console.log(err);
+    else { console.log("El archivo se guardo correctamente"); }
+  })
+}
 
 const diarios = {
   noticiasulp: {
@@ -58,5 +66,4 @@ const CrawlerPromesa = (pagina) => {
   })
 }
 
-CrawlerPromesa('slinforma').then(data => console.log(data)).catch(error => console.error(error))
-//Guardar en archivos
+CrawlerPromesa('slinforma').then(data => guardar(JSON.stringify(data,null,2))).catch(error => console.error(error))
