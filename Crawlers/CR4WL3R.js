@@ -19,9 +19,9 @@ const diarios = {
 	},
 	sltv:{
 		url:"http://sanluistv.com/",
-		diario: "San Luis TV"
-		patron: 'div.td-container',
-		patronTitulo:'h3.entry-title',
+		diario: "San Luis TV",
+		patron: 'div.td-block-span4',
+		patronTitulo:'h3',
 		patronImg:'img',
 		patronUrl:'a'
 	}
