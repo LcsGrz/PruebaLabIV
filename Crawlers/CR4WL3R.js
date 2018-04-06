@@ -4,17 +4,21 @@ const cheerio = require('cheerio')
 
 const guardar = (dato) => {
   fs.writeFile("noticias.json", JSON.stringify(dato, null, 2), err => {
-    if (err) console.log(err);
-    else { console.log("El archivo se guardo correctamente"); }
+    if (err) console.log("Se produjo un error al escribir.");
+    else console.log("El archivo se guardo correctamente.")
   })
 }
 
 const diarios = {
   noticiasulp: {
     url: 'http://noticias.ulp.edu.ar/php/functions/functions.php?operacion=7',
-    patron: 'div#titulo-portada'
+    patron: 'div.box-noticia',
+    diario: "Noticias ULP",
+    patronTitulo: 'div#titulo-portada',
+    patronImg: 'div.imagen-noticia a img',
+    patronUrl: '#titulo-portada a'
   },
-  diariosl: {
+  diariosl: { //FALTA PATRONES
     url: "http://eldiariodesanluis.com/",
     patron: 'h3 a.title'
   },
@@ -28,14 +32,23 @@ const diarios = {
   },
   lpsl: {
     url: "http://www.lapuntasanluis.com/",
+    diario: "La Punta San Luis",
     patron: 'article',
     patronTitulo: 'h2.article-title',
+    patronImg: 'img',
+    patronUrl: 'a'
+  },
+  sltv: {
+    url: "http://sanluistv.com/",
+    diario: "San Luis TV",
+    patron: 'div.td-block-span4',
+    patronTitulo: 'h3',
     patronImg: 'img',
     patronUrl: 'a'
   }
 }
 
-const CrawlerPromesa = (pagina) => {
+const CrawlerPromesa = pagina => {
   const {
     url,
     diario,
@@ -47,9 +60,8 @@ const CrawlerPromesa = (pagina) => {
 
   return new Promise((resolve, reject) => {
     request.post(url, (err, res, body) => {
-      if (err) {
-        reject(error);
-      }
+      if (err) return reject("Se produjo un error al scrapear.")
+
       const $ = cheerio.load(body)
       const articulos = $(patron)
       const noticias = []
@@ -66,13 +78,15 @@ const CrawlerPromesa = (pagina) => {
   })
 }
 const crawlers = [
+  CrawlerPromesa('noticiasulp'),
   CrawlerPromesa('slinforma'),
-  CrawlerPromesa('slinforma')
+  CrawlerPromesa('lpsl'),
+  CrawlerPromesa('sltv')
 ]
 
 Promise.all(crawlers).then(
   data => guardar(data)
 ).catch(
-  error => console.error(error)
+  error => console.log(error)
 )
 //CrawlerPromesa('slinforma').then(data => guardar(JSON.stringify(data,null,2))).catch(error => console.error(error))
