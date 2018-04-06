@@ -4,7 +4,11 @@ const cheerio = require('cheerio')
 const diarios = {
 	noticiasulp: {
 		url: 'http://noticias.ulp.edu.ar/php/functions/functions.php?operacion=7',
-		patron: 'div#titulo-portada'
+		patron: 'div.box-noticia',
+		patronTitulo: 'div#titulo-portada',
+		patronImg: 'div.imagen-noticia a img',
+		patronUrl: '#titulo-portada a'
+
 	},
 	diariosl:{
 		url: "http://eldiariodesanluis.com/",
@@ -47,4 +51,4 @@ const CrawlerPromesa = (pagina) => {
     })
 }
 
-CrawlerPromesa('slinforma').then(data => console.log(data)).catch(error => console.error(error))
+CrawlerPromesa('noticiasulp').then(data => console.log(data)).catch(error => console.error(error))
