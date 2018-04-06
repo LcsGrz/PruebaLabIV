@@ -17,10 +17,11 @@ const diarios = {
 		patronImg:'.item-image img',
 		patronUrl:'a'
 	},
-	lpsl:{
-		url:"http://www.lapuntasanluis.com/",
-		patron: 'article',
-		patronTitulo:'h2.article-title',
+	sltv:{
+		url:"http://sanluistv.com/",
+		diario: "San Luis TV",
+		patron: 'div.td-block-span4',
+		patronTitulo:'h3',
 		patronImg:'img',
 		patronUrl:'a'
 	}
@@ -47,4 +48,4 @@ const CrawlerPromesa = (pagina) => {
     })
 }
 
-CrawlerPromesa('slinforma').then(data => console.log(data)).catch(error => console.error(error))
+CrawlerPromesa('sltv').then(data => console.log(data)).catch(error => console.error(error))
