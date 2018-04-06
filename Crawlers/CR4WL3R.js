@@ -3,7 +3,7 @@ const request = require('request')
 const cheerio = require('cheerio')
 
 const guardar = (dato) => {
-  fs.writeFile("noticias.json", dato, err => {
+  fs.writeFile("noticias.json", JSON.stringify(dato, null, 2), err => {
     if (err) console.log(err);
     else { console.log("El archivo se guardo correctamente"); }
   })
@@ -65,5 +65,14 @@ const CrawlerPromesa = (pagina) => {
     })
   })
 }
+const crawlers = [
+  CrawlerPromesa('slinforma'),
+  CrawlerPromesa('slinforma')
+]
 
-CrawlerPromesa('slinforma').then(data => guardar(JSON.stringify(data,null,2))).catch(error => console.error(error))
+Promise.all(crawlers).then(
+  data => guardar(data)
+).catch(
+  error => console.error(error)
+)
+//CrawlerPromesa('slinforma').then(data => guardar(JSON.stringify(data,null,2))).catch(error => console.error(error))
