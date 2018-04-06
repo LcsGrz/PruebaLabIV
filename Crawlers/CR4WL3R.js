@@ -41,7 +41,7 @@ const CrawlerPromesa = (pagina) => {
         		console.log('====================')
         	});
 
-            const data = "asd"//$(patron).text().trim()
+            const data = "FIN"//$(patron).text().trim()
             resolve(data)
         })
     })
