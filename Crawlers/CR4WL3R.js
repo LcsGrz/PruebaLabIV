@@ -11,7 +11,8 @@ const diarios = {
 		patron: 'h3 a.title'
 	},
 	slinforma:{
-		url: "http://www.sanluisinforma.com.ar/",
+        url: "http://www.sanluisinforma.com.ar/",
+        diario: "San Luis Informa",
 		patron: 'article',
 		patronTitulo:'h2.article-title',
 		patronImg:'.item-image img',
@@ -38,7 +39,14 @@ const CrawlerPromesa = (pagina) => {
         		console.log($(el).find(patronTitulo).text().trim())
         		console.log($(el).find(patronImg).attr('src'))
         		console.log($(el).find(patronUrl).attr('href'))
-        		console.log('====================')
+                console.log('====================')
+                
+                {
+                    "Noticia": [
+                        { "Diaro": pagina, "lastName": "Doe" },
+                    ]
+                }
+
         	});
 
             const data = "FIN"//$(patron).text().trim()
@@ -48,3 +56,4 @@ const CrawlerPromesa = (pagina) => {
 }
 
 CrawlerPromesa('slinforma').then(data => console.log(data)).catch(error => console.error(error))
+//Guardar en archivos
