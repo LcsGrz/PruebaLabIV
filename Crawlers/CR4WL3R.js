@@ -12,11 +12,6 @@ show tables
 db.noticias.find().pretty()
 */ 
 //---------------------------------------------------------------------------------------------
-//GUARDAR EN MONGODB
-module.exports = {
-  mongoUrl: "mongodb://127.0.0.1:27017/",
-  mongoDbName: "db"
-}
 
 const guardarBD = datos => {
   datos.map(n => {

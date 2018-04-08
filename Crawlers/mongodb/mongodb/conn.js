@@ -1,6 +1,6 @@
 'use strict';
 
-const data = require('../data');
+const data = require('../../dataMongo');
 const mongoClient = require('mongodb').MongoClient;
 
 exports.open = () => {
