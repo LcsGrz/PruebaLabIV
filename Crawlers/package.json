@@ -10,6 +10,11 @@
   "license": "ISC",
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
+    "mongodb": "^3.0.5",
+    "mongoose": "^5.0.13",
     "request": "^2.85.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1"
   }
 }
