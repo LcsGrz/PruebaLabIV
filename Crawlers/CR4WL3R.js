@@ -2,7 +2,7 @@ const fs = require('fs');
 const request = require('request')
 const cheerio = require('cheerio')
 
-const guardar = (dato) => {
+const guardar = dato => {
   fs.writeFile("noticias.json", JSON.stringify(dato, null, 2), err => {
     if (err) console.log("Se produjo un error al escribir.");
     else console.log("El archivo se guardo correctamente.")
@@ -63,9 +63,8 @@ const CrawlerPromesa = pagina => {
       if (err) return reject("Se produjo un error al scrapear.")
 
       const $ = cheerio.load(body)
-      const articulos = $(patron)
       const noticias = []
-      articulos.each((index, el) => {
+      $(patron).each((index, el) => {
         noticias.push({
           "Diaro": diario,
           "Titulo": $(el).find(patronTitulo).text().trim(),
