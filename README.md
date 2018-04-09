@@ -1,2 +1,4 @@
-Nueva rama.
-Se creo una sola funcion de crawler para el uso cotidiano. arrehhhh
+Guardo datos en mongoDB
+Funciona perfecto
+
+Gracias Sturmenta por tu libreria <3
